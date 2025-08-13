@@ -1,25 +1,25 @@
-type CommandHandler = (cmdName: string, ...args: string[]) => void;
+type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
 
 export type CommandsRegistry = Record<string, CommandHandler>;
 
-export const registerCommand = (
+export const registerCommand = async (
   registry: CommandsRegistry,
   cmdName: string,
   handler: CommandHandler
-): void => {
+): Promise<void> => {
   registry[cmdName] = handler;
 };
 
-export const runCommand = (
+export const runCommand = async (
   registry: CommandsRegistry,
   cmdName: string,
   ...args: string[]
-): void => {
+): Promise<void> => {
   const cmd = registry[cmdName];
 
   if (cmd === undefined) {
     throw new Error(`Unknown command: ${cmdName}`);
   }
 
-  cmd(cmdName, ...args);
+  await cmd(cmdName, ...args);
 };
