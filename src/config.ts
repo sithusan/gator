@@ -7,44 +7,6 @@ type Config = {
   currentUserName: string;
 };
 
-type CommandHandler = (cmdName: string, ...args: string[]) => void;
-
-export type CommandsRegistry = Record<string, CommandHandler>;
-
-export const registerCommand = (
-  registry: CommandsRegistry,
-  cmdName: string,
-  handler: CommandHandler
-) => {
-  registry[cmdName] = handler;
-};
-
-export const runCommand = (
-  registry: CommandsRegistry,
-  cmdName: string,
-  ...args: string[]
-) => {
-  const cmd = registry[cmdName];
-
-  if (cmd === undefined) {
-    console.log("command not found");
-    process.exit(1);
-  }
-
-  cmd(cmdName, ...args);
-};
-
-export const handlerLogin = (cmdName: string, ...args: string[]): void => {
-  if (args.length === 0) {
-    console.log(`${cmdName} expects a single argument, the username`);
-    process.exit(1);
-  }
-
-  const userName = args.at(0)!;
-  setUser(userName); // Already checked the length;
-  console.log(`User: ${userName} has been set.`);
-};
-
 export const setUser = (userName: string): void => {
   const config = readConfig();
   config.currentUserName = userName;
