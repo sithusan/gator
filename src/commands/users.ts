@@ -1,7 +1,8 @@
-import { setUser } from "src/config";
+import { readConfig, setUser } from "src/config";
 import {
   createUser,
   findUserBy,
+  getUsers,
   truncateUsers,
 } from "src/lib/db/queries/users";
 
@@ -44,6 +45,17 @@ export const handlerRegister = async (
 export const handlerReset = async () => {
   await truncateUsers();
   console.log(`Users table truncated`);
+};
+
+export const handlerGetUsers = async () => {
+  const users = await getUsers();
+  const { currentUserName } = readConfig();
+
+  for (const user of users) {
+    console.log(
+      `${user.name} ${user.name === currentUserName ? "(current)" : ""}`
+    );
+  }
 };
 
 const validate = (cmdName: string, ...args: string[]) => {

@@ -17,3 +17,7 @@ export const findUserBy = async (name: string) => {
 export const truncateUsers = async (): Promise<void> => {
   await db.execute(sql.raw(`TRUNCATE TABLE users;`));
 };
+
+export const getUsers = async () => {
+  return await db.query.users.findMany();
+};
