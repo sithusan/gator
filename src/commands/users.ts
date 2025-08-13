@@ -1,5 +1,9 @@
 import { setUser } from "src/config";
-import { createUser, findUserBy } from "src/lib/db/queries/users";
+import {
+  createUser,
+  findUserBy,
+  truncateUsers,
+} from "src/lib/db/queries/users";
 
 export const handlerLogin = async (
   cmdName: string,
@@ -35,6 +39,11 @@ export const handlerRegister = async (
 
   setUser(createdUser.name);
   console.log(`User: ${createdUser.name} has been set`);
+};
+
+export const handlerReset = async () => {
+  await truncateUsers();
+  console.log(`Users table truncated`);
 };
 
 const validate = (cmdName: string, ...args: string[]) => {
