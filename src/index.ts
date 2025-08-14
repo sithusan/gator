@@ -10,7 +10,7 @@ import {
   handlerRegister,
   handlerReset,
 } from "./commands/users";
-import { handlerAddFeed, handlerAgg } from "./commands/feed";
+import { handlerAddFeed, handlerAgg, handlerGetFeeds } from "./commands/feed";
 
 async function main() {
   const args = argv.slice(2);
@@ -30,6 +30,7 @@ async function main() {
   registerCommand(commandsRegistry, "users", handlerGetUsers);
   registerCommand(commandsRegistry, "agg", handlerAgg);
   registerCommand(commandsRegistry, "addfeed", handlerAddFeed);
+  registerCommand(commandsRegistry, "feeds", handlerGetFeeds);
 
   try {
     await runCommand(commandsRegistry, cmdName, ...args);

@@ -34,7 +34,7 @@ const writeConfig = (cfg: Config): void => {
       db_url: cfg.dbUrl,
       current_user_name: cfg.currentUserName,
     }),
-    "utf-8"
+    "utf-8",
   );
 };
 

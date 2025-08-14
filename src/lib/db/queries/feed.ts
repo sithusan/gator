@@ -17,3 +17,7 @@ export const createFeed = async (feed: {
 
   return result;
 };
+
+export const getFeeds = async (): Promise<Feed[]> => {
+  return await db.query.feeds.findMany();
+};

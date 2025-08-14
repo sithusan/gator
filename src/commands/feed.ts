@@ -1,7 +1,7 @@
 import { readConfig } from "src/config";
 import { fetchFeed } from "../lib/rss";
-import { findUserBy } from "src/lib/db/queries/users";
-import { createFeed } from "src/lib/db/queries/feed";
+import { findUserBy, getUsers } from "src/lib/db/queries/users";
+import { createFeed, getFeeds } from "src/lib/db/queries/feed";
 import { Feed, User } from "src/lib/db/schema";
 
 export const handlerAgg = async (): Promise<void> => {
@@ -38,6 +38,22 @@ export const handlerAddFeed = async (
   });
 
   printFeed(feed, user);
+};
+
+export const handlerGetFeeds = async (): Promise<void> => {
+  const [users, feeds] = await Promise.all([getUsers(), getFeeds()]); // better to have the query with relation. but not now.
+
+  const userMap: Map<string, User> = new Map();
+
+  for (const user of users) {
+    userMap.set(user.id, user);
+  }
+
+  for (const feed of feeds) {
+    console.log(`Feed Name : ${feed.name}`);
+    console.log(`URL : ${feed.url}`);
+    console.log(`Created User Name: ${userMap.get(feed.user_id)?.name}`);
+  }
 };
 
 const printFeed = (feed: Feed, user: User): void => {
