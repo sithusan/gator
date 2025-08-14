@@ -10,7 +10,7 @@ import {
   handlerRegister,
   handlerReset,
 } from "./commands/users";
-import { handlerAddFeed, handlerAgg, handlerGetFeeds } from "./commands/feed";
+import { handlerAddFeed, handlerAgg, handlerGetFeeds } from "./commands/feeds";
 
 async function main() {
   const args = argv.slice(2);
