@@ -42,12 +42,12 @@ export const handlerRegister = async (
   console.log(`User: ${createdUser.name} has been set`);
 };
 
-export const handlerReset = async () => {
+export const handlerReset = async (): Promise<void> => {
   await truncateUsers();
   console.log(`Users table truncated`);
 };
 
-export const handlerGetUsers = async () => {
+export const handlerGetUsers = async (): Promise<void> => {
   const users = await getUsers();
   const { currentUserName } = readConfig();
 
@@ -58,7 +58,7 @@ export const handlerGetUsers = async () => {
   }
 };
 
-const validate = (cmdName: string, ...args: string[]) => {
+const validate = (cmdName: string, ...args: string[]): void => {
   if (args.length === 0) {
     throw new Error(`${cmdName} expects a single argument, the username`);
   }

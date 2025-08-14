@@ -2,11 +2,11 @@ type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
 
 export type CommandsRegistry = Record<string, CommandHandler>;
 
-export const registerCommand = async (
+export const registerCommand = (
   registry: CommandsRegistry,
   cmdName: string,
   handler: CommandHandler
-): Promise<void> => {
+): void => {
   registry[cmdName] = handler;
 };
 

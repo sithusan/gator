@@ -1,11 +1,11 @@
 import { db } from "..";
-import { feeds } from "../schema";
+import { Feed, feeds } from "../schema";
 
 export const createFeed = async (feed: {
   name: string;
   url: string;
   userId: string;
-}) => {
+}): Promise<Feed> => {
   const [result] = await db
     .insert(feeds)
     .values({

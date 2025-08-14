@@ -24,12 +24,12 @@ async function main() {
 
   const commandsRegistry: CommandsRegistry = {};
 
-  await registerCommand(commandsRegistry, "login", handlerLogin);
-  await registerCommand(commandsRegistry, "register", handlerRegister);
-  await registerCommand(commandsRegistry, "reset", handlerReset);
-  await registerCommand(commandsRegistry, "users", handlerGetUsers);
-  await registerCommand(commandsRegistry, "agg", handlerAgg);
-  await registerCommand(commandsRegistry, "addfeed", handlerAddFeed);
+  registerCommand(commandsRegistry, "login", handlerLogin);
+  registerCommand(commandsRegistry, "register", handlerRegister);
+  registerCommand(commandsRegistry, "reset", handlerReset);
+  registerCommand(commandsRegistry, "users", handlerGetUsers);
+  registerCommand(commandsRegistry, "agg", handlerAgg);
+  registerCommand(commandsRegistry, "addfeed", handlerAddFeed);
 
   try {
     await runCommand(commandsRegistry, cmdName, ...args);

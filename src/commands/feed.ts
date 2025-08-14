@@ -2,14 +2,17 @@ import { readConfig } from "src/config";
 import { fetchFeed } from "../lib/rss";
 import { findUserBy } from "src/lib/db/queries/users";
 import { createFeed } from "src/lib/db/queries/feed";
-import { feeds, users } from "src/lib/db/schema";
+import { Feed, User } from "src/lib/db/schema";
 
-export const handlerAgg = async () => {
+export const handlerAgg = async (): Promise<void> => {
   const result = await fetchFeed("https://www.wagslane.dev/index.xml");
   console.log(JSON.stringify(result, null, 2));
 };
 
-export const handlerAddFeed = async (cmdName: string, ...args: string[]) => {
+export const handlerAddFeed = async (
+  cmdName: string,
+  ...args: string[]
+): Promise<void> => {
   const { currentUserName } = readConfig();
 
   if (currentUserName === undefined) {
@@ -37,10 +40,7 @@ export const handlerAddFeed = async (cmdName: string, ...args: string[]) => {
   printFeed(feed, user);
 };
 
-type Feed = typeof feeds.$inferSelect;
-type User = typeof users.$inferSelect;
-
-const printFeed = (feed: Feed, user: User) => {
+const printFeed = (feed: Feed, user: User): void => {
   console.log("Feed");
   console.log(`Name: ${feed.name}`);
   console.log(`URL: ${feed.url}`);
