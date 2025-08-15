@@ -3,6 +3,7 @@ import { fetchFeed } from "../lib/rss";
 import { findUserBy, getUsers } from "src/lib/db/queries/users";
 import { createFeed, getFeeds } from "src/lib/db/queries/feed";
 import { Feed, User } from "src/lib/db/schema";
+import { createFeedFollow } from "src/lib/db/queries/feed_follows";
 
 export const handlerAgg = async (): Promise<void> => {
   const result = await fetchFeed("https://www.wagslane.dev/index.xml");
@@ -34,6 +35,11 @@ export const handlerAddFeed = async (
   const feed = await createFeed({
     name: feedName,
     url: url,
+    userId: user.id,
+  });
+
+  await createFeedFollow({
+    feedId: feed.id,
     userId: user.id,
   });
 
