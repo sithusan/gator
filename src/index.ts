@@ -11,7 +11,11 @@ import {
   handlerReset,
 } from "./commands/users";
 import { handlerAddFeed, handlerAgg, handlerGetFeeds } from "./commands/feeds";
-import { handlerFollow, handlerFollowing } from "./commands/follows";
+import {
+  handlerFollow,
+  handlerFollowing,
+  handlerUnFollow,
+} from "./commands/follows";
 import { middlewareLoggedIn } from "./middleware";
 
 async function main() {
@@ -48,6 +52,11 @@ async function main() {
     commandsRegistry,
     "following",
     middlewareLoggedIn(handlerFollowing)
+  );
+  registerCommand(
+    commandsRegistry,
+    "unfollow",
+    middlewareLoggedIn(handlerUnFollow)
   );
 
   try {
