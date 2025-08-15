@@ -1,10 +1,8 @@
-import { readConfig } from "src/config";
 import { findFeedBy } from "src/lib/db/queries/feed";
 import {
   createFeedFollow,
   getFeedFollowsForUser,
 } from "src/lib/db/queries/feed_follows";
-import { findUserBy } from "src/lib/db/queries/users";
 import { User } from "src/lib/db/schema";
 import { UserCommandHandler } from "src/middleware";
 
