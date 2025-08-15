@@ -5,30 +5,24 @@ import {
   getFeedFollowsForUser,
 } from "src/lib/db/queries/feed_follows";
 import { findUserBy } from "src/lib/db/queries/users";
+import { User } from "src/lib/db/schema";
+import { UserCommandHandler } from "src/middleware";
 
-export const handlerFollow = async (
+export const handlerFollow: UserCommandHandler = async (
+  user: User,
   cmdName: string,
   ...args: string[]
 ): Promise<void> => {
-  const { currentUserName } = readConfig();
-
-  if (currentUserName === undefined) {
-    throw new Error(`You need to login first to use the command: ${cmdName}`);
-  }
-
   const url = args.at(0);
 
   if (url === undefined) {
     throw new Error("You needs to provide URL of the feed");
   }
 
-  const [feed, user] = await Promise.all([
-    findFeedBy(url),
-    findUserBy(currentUserName),
-  ]);
+  const feed = await findFeedBy(url);
 
-  if (feed === undefined || user === undefined) {
-    throw new Error("Feed or user not found");
+  if (feed === undefined) {
+    throw new Error("Feed not found");
   }
 
   const feedFollow = await createFeedFollow({
@@ -41,14 +35,10 @@ export const handlerFollow = async (
   console.log(`Current User : ${feedFollow.users.name}`);
 };
 
-export const handlerFollowing = async (cmdName: string): Promise<void> => {
-  const { currentUserName } = readConfig();
-
-  if (currentUserName === undefined) {
-    throw new Error(`You need to login first to use the command: ${cmdName}`);
-  }
-
-  const feeds = await getFeedFollowsForUser(currentUserName);
+export const handlerFollowing: UserCommandHandler = async (
+  user: User
+): Promise<void> => {
+  const feeds = await getFeedFollowsForUser(user.name);
 
   for (const feed of feeds) {
     console.log(feed.name);

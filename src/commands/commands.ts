@@ -1,11 +1,14 @@
-type CommandHandler = (cmdName: string, ...args: string[]) => Promise<void>;
+export type CommandHandler = (
+  cmdName: string,
+  ...args: string[]
+) => Promise<void>;
 
 export type CommandsRegistry = Record<string, CommandHandler>;
 
 export const registerCommand = (
   registry: CommandsRegistry,
   cmdName: string,
-  handler: CommandHandler,
+  handler: CommandHandler
 ): void => {
   registry[cmdName] = handler;
 };

@@ -28,7 +28,6 @@ export const createFeedFollow = async (feedFollow: {
 export const getFeedFollowsForUser = async (
   userName: string
 ): Promise<Feed[]> => {
-  
   const result = await db
     .select({ feeds })
     .from(users)

@@ -5,8 +5,9 @@ import {
   getUsers,
   truncateUsers,
 } from "src/lib/db/queries/users";
+import { CommandHandler } from "./commands";
 
-export const handlerLogin = async (
+export const handlerLogin: CommandHandler = async (
   cmdName: string,
   ...args: string[]
 ): Promise<void> => {
@@ -23,7 +24,7 @@ export const handlerLogin = async (
   console.log(`User: ${existingUser.name} has been set`);
 };
 
-export const handlerRegister = async (
+export const handlerRegister: CommandHandler = async (
   cmdName: string,
   ...args: string[]
 ): Promise<void> => {
@@ -42,7 +43,7 @@ export const handlerRegister = async (
   console.log(`User: ${createdUser.name} has been set`);
 };
 
-export const handlerReset = async (): Promise<void> => {
+export const handlerReset: CommandHandler = async (): Promise<void> => {
   await truncateUsers();
   console.log(`Users table truncated`);
 };
@@ -53,7 +54,7 @@ export const handlerGetUsers = async (): Promise<void> => {
 
   for (const user of users) {
     console.log(
-      `${user.name} ${user.name === currentUserName ? "(current)" : ""}`,
+      `${user.name} ${user.name === currentUserName ? "(current)" : ""}`
     );
   }
 };

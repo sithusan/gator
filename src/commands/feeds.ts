@@ -1,35 +1,25 @@
-import { readConfig } from "src/config";
 import { fetchFeed } from "../lib/rss";
-import { findUserBy, getUsers } from "src/lib/db/queries/users";
+import { getUsers } from "src/lib/db/queries/users";
 import { createFeed, getFeeds } from "src/lib/db/queries/feed";
 import { Feed, User } from "src/lib/db/schema";
 import { createFeedFollow } from "src/lib/db/queries/feed_follows";
+import { UserCommandHandler } from "src/middleware";
+import { CommandHandler } from "./commands";
 
-export const handlerAgg = async (): Promise<void> => {
+export const handlerAgg: CommandHandler = async (): Promise<void> => {
   const result = await fetchFeed("https://www.wagslane.dev/index.xml");
   console.log(JSON.stringify(result, null, 2));
 };
 
-export const handlerAddFeed = async (
+export const handlerAddFeed: UserCommandHandler = async (
+  user: User,
   cmdName: string,
   ...args: string[]
 ): Promise<void> => {
-  const { currentUserName } = readConfig();
-
-  if (currentUserName === undefined) {
-    throw new Error(`You need to login first to use the command: ${cmdName}`);
-  }
-
   const [feedName, url] = args.slice(0, 2);
 
   if (feedName === undefined || url === undefined) {
     throw new Error("Both feed name and url are required");
-  }
-
-  const user = await findUserBy(currentUserName);
-
-  if (user === undefined) {
-    throw new Error("User not found");
   }
 
   const feed = await createFeed({
@@ -46,7 +36,7 @@ export const handlerAddFeed = async (
   printFeed(feed, user);
 };
 
-export const handlerGetFeeds = async (): Promise<void> => {
+export const handlerGetFeeds: CommandHandler = async (): Promise<void> => {
   const [users, feeds] = await Promise.all([getUsers(), getFeeds()]); // better to have the query with relation. but not now.
 
   const userMap: Map<string, User> = new Map();
