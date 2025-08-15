@@ -31,12 +31,14 @@ async function main() {
   registerCommand(commandsRegistry, "reset", handlerReset);
   registerCommand(commandsRegistry, "users", handlerGetUsers);
   registerCommand(commandsRegistry, "agg", handlerAgg);
+  registerCommand(commandsRegistry, "feeds", handlerGetFeeds);
+
+  // with middleware
   registerCommand(
     commandsRegistry,
     "addfeed",
     middlewareLoggedIn(handlerAddFeed)
   );
-  registerCommand(commandsRegistry, "feeds", handlerGetFeeds);
   registerCommand(
     commandsRegistry,
     "follow",
