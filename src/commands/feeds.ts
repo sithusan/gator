@@ -13,7 +13,7 @@ export const handlerAgg: CommandHandler = async (): Promise<void> => {
 
 export const handlerAddFeed: UserCommandHandler = async (
   user: User,
-  cmdName: string,
+  _: string,
   ...args: string[]
 ): Promise<void> => {
   const [feedName, url] = args.slice(0, 2);

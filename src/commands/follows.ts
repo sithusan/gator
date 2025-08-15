@@ -8,7 +8,7 @@ import { UserCommandHandler } from "src/middleware";
 
 export const handlerFollow: UserCommandHandler = async (
   user: User,
-  cmdName: string,
+  _: string,
   ...args: string[]
 ): Promise<void> => {
   const url = args.at(0);
