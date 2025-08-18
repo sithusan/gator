@@ -1,15 +1,9 @@
-import { fetchFeed } from "../lib/rss";
 import { getUsers } from "src/lib/db/queries/users";
 import { createFeed, getFeeds } from "src/lib/db/queries/feed";
 import { Feed, User } from "src/lib/db/schema";
 import { createFeedFollow } from "src/lib/db/queries/feed_follows";
 import { UserCommandHandler } from "src/middleware";
 import { CommandHandler } from "./commands";
-
-export const handlerAgg: CommandHandler = async (): Promise<void> => {
-  const result = await fetchFeed("https://www.wagslane.dev/index.xml");
-  console.log(JSON.stringify(result, null, 2));
-};
 
 export const handlerAddFeed: UserCommandHandler = async (
   user: User,

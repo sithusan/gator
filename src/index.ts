@@ -10,13 +10,14 @@ import {
   handlerRegister,
   handlerReset,
 } from "./commands/users";
-import { handlerAddFeed, handlerAgg, handlerGetFeeds } from "./commands/feeds";
+import { handlerAddFeed, handlerGetFeeds } from "./commands/feeds";
 import {
   handlerFollow,
   handlerFollowing,
   handlerUnFollow,
 } from "./commands/follows";
 import { middlewareLoggedIn } from "./middleware";
+import { handlerAgg } from "./commands/aggregate";
 
 async function main() {
   const args = argv.slice(2);
