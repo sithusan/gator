@@ -3,7 +3,7 @@
 # Gator CLI  
 **RSS feeds but make it multiplayer… in your terminal.**  
 
-Keep up with blogs, news sites, and podcasts — straight from your CLI. Add feeds, follow others, and browse aggregated posts like it’s 2010 LAN party vibes, but with Postgres.  
+Gator keep up with blogs, news sites, and podcasts — straight from your CLI. Add feeds, follow others, and browse aggregated posts like it’s 2010 LAN party vibes, but with Postgres.  
 
 ---
 
