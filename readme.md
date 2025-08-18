@@ -1,5 +1,3 @@
-
-
 # Gator CLI  
 **RSS feeds but make it multiplayer… in your terminal.**  
 
