@@ -1,6 +1,6 @@
 import { desc, eq, getTableColumns } from "drizzle-orm";
 import { db } from "..";
-import { feeds, Post, posts, users } from "../schema";
+import { feed_follows, feeds, Post, posts, users } from "../schema";
 
 export const createPost = async (post: {
   title: string;
@@ -23,12 +23,16 @@ export const createPost = async (post: {
   return result;
 };
 
-export const getPostsForUser = async (limit: number): Promise<Post[]> => {
+export const getPostsForUser = async (
+  userId: string,
+  limit: number
+): Promise<Post[]> => {
   return await db
     .select(getTableColumns(posts))
     .from(posts)
-    .innerJoin(feeds, eq(feeds.id, posts.feed_id))
-    .innerJoin(users, eq(users.id, feeds.user_id))
+    .innerJoin(feed_follows, eq(posts.feed_id, feed_follows.feed_id))
+    .innerJoin(feeds, eq(posts.feed_id, feeds.id))
+    .where(eq(feed_follows.user_id, userId))
     .orderBy(desc(posts.id))
     .limit(limit);
 };

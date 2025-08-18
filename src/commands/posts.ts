@@ -9,7 +9,12 @@ export const handlerBrowse: UserCommandHandler = async (
 ): Promise<void> => {
   const limit = args.at(0) ?? 2;
 
-  const posts = await getPostsForUser(+limit);
+  const posts = await getPostsForUser(user.id, +limit);
+
+  if (posts.length === 0) {
+    console.log(`No Posts for current user: ${user.name}`);
+    return;
+  }
 
   for (const post of posts) {
     console.log(`Title : ${post.title}`);
