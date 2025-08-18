@@ -54,7 +54,7 @@ export const handlerGetUsers = async (): Promise<void> => {
 
   for (const user of users) {
     console.log(
-      `${user.name} ${user.name === currentUserName ? "(current)" : ""}`
+      `${user.name} ${user.name === currentUserName ? "(current)" : ""}`,
     );
   }
 };

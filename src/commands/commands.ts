@@ -8,7 +8,7 @@ export type CommandsRegistry = Record<string, CommandHandler>;
 export const registerCommand = (
   registry: CommandsRegistry,
   cmdName: string,
-  handler: CommandHandler
+  handler: CommandHandler,
 ): void => {
   registry[cmdName] = handler;
 };

@@ -58,7 +58,7 @@ export const handlerUnFollow: UserCommandHandler = async (
 };
 
 export const handlerFollowing: UserCommandHandler = async (
-  user: User
+  user: User,
 ): Promise<void> => {
   const feeds = await getFeedFollowsForUser(user.name);
 

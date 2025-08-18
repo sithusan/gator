@@ -38,7 +38,7 @@ export const markFeedFetched = async (id: string): Promise<void> => {
 
 export const getNextFeedToFetch = async (): Promise<Feed | undefined> => {
   const [result] = await db.execute(
-    sql`select * from feeds ORDER BY last_fetched_at ASC NULLS FIRST`
+    sql`select * from feeds ORDER BY last_fetched_at ASC NULLS FIRST`,
   );
 
   return result as Feed;

@@ -43,27 +43,27 @@ async function main() {
   registerCommand(
     commandsRegistry,
     "addfeed",
-    middlewareLoggedIn(handlerAddFeed)
+    middlewareLoggedIn(handlerAddFeed),
   );
   registerCommand(
     commandsRegistry,
     "follow",
-    middlewareLoggedIn(handlerFollow)
+    middlewareLoggedIn(handlerFollow),
   );
   registerCommand(
     commandsRegistry,
     "following",
-    middlewareLoggedIn(handlerFollowing)
+    middlewareLoggedIn(handlerFollowing),
   );
   registerCommand(
     commandsRegistry,
     "unfollow",
-    middlewareLoggedIn(handlerUnFollow)
+    middlewareLoggedIn(handlerUnFollow),
   );
   registerCommand(
     commandsRegistry,
     "browse",
-    middlewareLoggedIn(handlerBrowse)
+    middlewareLoggedIn(handlerBrowse),
   );
 
   try {

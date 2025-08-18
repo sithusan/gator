@@ -40,11 +40,11 @@ export const scrapeFeeds = async () => {
   }
 
   await markFeedFetched(nextFeed.id);
-  
+
   const fetchedFeed = await fetchFeed(nextFeed.url);
 
   console.log(
-    `Fetching ${fetchedFeed.channel.title}, ${fetchedFeed.channel.description}`
+    `Fetching ${fetchedFeed.channel.title}, ${fetchedFeed.channel.description}`,
   );
   console.log("===========");
 
@@ -61,6 +61,6 @@ export const scrapeFeeds = async () => {
 
 const handleError = (err: unknown) => {
   console.error(
-    `Error scraping feeds: ${err instanceof Error ? err.message : err}`
+    `Error scraping feeds: ${err instanceof Error ? err.message : err}`,
   );
 };

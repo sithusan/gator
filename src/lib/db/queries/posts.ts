@@ -25,7 +25,7 @@ export const createPost = async (post: {
 
 export const getPostsForUser = async (
   userId: string,
-  limit: number
+  limit: number,
 ): Promise<Post[]> => {
   return await db
     .select(getTableColumns(posts))

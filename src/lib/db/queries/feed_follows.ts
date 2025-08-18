@@ -34,13 +34,13 @@ export const deleteFeedFollow = async (feedFollow: {
     .where(
       and(
         eq(feed_follows.feed_id, feedFollow.feedId),
-        eq(feed_follows.user_id, feedFollow.userId)
-      )
+        eq(feed_follows.user_id, feedFollow.userId),
+      ),
     );
 };
 
 export const getFeedFollowsForUser = async (
-  userName: string
+  userName: string,
 ): Promise<Feed[]> => {
   const result = await db
     .select({ feeds })
