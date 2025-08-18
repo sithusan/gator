@@ -1,7 +1,9 @@
-import { getNextFeedToFetch, markFeedFetched } from "src/lib/db/queries/feed";
+import { getNextFeedToFetch, markFeedFetched } from "src/lib/db/queries/feeds";
 import { CommandHandler } from "./commands";
 import { fetchFeed } from "src/lib/rss";
 import { parseDuration } from "src/lib/time";
+import { createPost } from "src/lib/db/queries/posts";
+import { title } from "process";
 
 export const handlerAgg: CommandHandler = async (
   cmdName: string,
@@ -38,6 +40,7 @@ export const scrapeFeeds = async () => {
   }
 
   await markFeedFetched(nextFeed.id);
+  
   const fetchedFeed = await fetchFeed(nextFeed.url);
 
   console.log(
@@ -46,7 +49,13 @@ export const scrapeFeeds = async () => {
   console.log("===========");
 
   for (const item of fetchedFeed.channel.item) {
-    console.log(JSON.stringify(item, null, 2));
+    createPost({
+      title: item.title,
+      url: item.link,
+      description: item.description,
+      publishedAt: new Date(item.pubDate),
+      feedId: nextFeed.id,
+    }).catch(handleError);
   }
 };
 

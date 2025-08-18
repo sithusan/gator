@@ -1,4 +1,4 @@
-import { findFeedBy } from "src/lib/db/queries/feed";
+import { findFeedBy } from "src/lib/db/queries/feeds";
 import {
   createFeedFollow,
   deleteFeedFollow,

@@ -18,6 +18,7 @@ import {
 } from "./commands/follows";
 import { middlewareLoggedIn } from "./middleware";
 import { handlerAgg } from "./commands/aggregate";
+import { handlerBrowse } from "./commands/posts";
 
 async function main() {
   const args = argv.slice(2);
@@ -58,6 +59,11 @@ async function main() {
     commandsRegistry,
     "unfollow",
     middlewareLoggedIn(handlerUnFollow)
+  );
+  registerCommand(
+    commandsRegistry,
+    "browse",
+    middlewareLoggedIn(handlerBrowse)
   );
 
   try {

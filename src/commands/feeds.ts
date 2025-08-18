@@ -1,5 +1,5 @@
 import { getUsers } from "src/lib/db/queries/users";
-import { createFeed, getFeeds } from "src/lib/db/queries/feed";
+import { createFeed, getFeeds } from "src/lib/db/queries/feeds";
 import { Feed, User } from "src/lib/db/schema";
 import { createFeedFollow } from "src/lib/db/queries/feed_follows";
 import { UserCommandHandler } from "src/middleware";
